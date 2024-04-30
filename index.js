@@ -1,14 +1,13 @@
 const express = require('express');
+const {json} = require("express");
 const app = express();
-const bodyParser = require('body-parser');
-const { connectToDatabase } = require('./database/index');
+const emailRoutes = require('./routes/emailRoute')
+app.use(json());
 
-app.use(bodyParser.json());
-
-app.use('/api/demo', require('./routes/demoRoute'));
+app.use('/api/email', emailRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    connectToDatabase();
+    
     console.log(`Server running on port ${PORT}`);
 });
